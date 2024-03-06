@@ -32,7 +32,7 @@ public class List {
         CharData c = new CharData(chr);
         Node newNode = new Node(c, first);
         first = newNode;
-        this.size  ++;
+        this.size++;
     }
     
     /** GIVE Textual representation of this list. */
@@ -55,6 +55,7 @@ public class List {
     public int indexOf(char chr) {
         Node current = first;
         int index = 0;
+
         while (current != null) {
             if (current.cp.equals(chr)) {
                 return index;
@@ -73,17 +74,16 @@ public class List {
         if (index >= 0) {
             Node current = first;
             int indec = 0;
-            while(current != null){
-                if(index == indec){
-                    current.cp.count++;
-                    current.next = null;
+            while (current != null) {
+                if (index == indec) {
+                    current.cp.count++;  // Increment the count of the existing CharData object
+                    return;  // Return after updating the count
                 }
                 current = current.next;
                 indec++;
             }
-            addFirst(chr);
-
         }
+        addFirst(chr);
     }
 
     /** GIVE If the given character exists in one of the CharData objects
@@ -98,6 +98,8 @@ public class List {
                 this.size++;
                 return true;
             }
+            pre = current;
+            current = current.next;
 
         }
         return false;
@@ -123,7 +125,7 @@ public class List {
      }
 
 
-    }
+    
 
     /** Returns an array of CharData objects, containing all the CharData objects in this list. */
     public CharData[] toArray() {
