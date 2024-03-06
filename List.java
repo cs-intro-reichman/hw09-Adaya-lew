@@ -130,16 +130,15 @@ public class List {
     /** Returns an array of CharData objects, containing all the CharData objects in this list. */
     public CharData get(int index) {
         Node current = first;
-        int indexRun = 0;
-        if((index < 0) || (index > this.getSize())) {
-            throw new IndexOutOfBoundsException("The index doesn't exist");
-        } else {
-            while(indexRun < index) {
+        if (index >= 0 && index < size) {
+            for (int i = 0; i < index; i++) {
                 current = current.next;
-                indexRun++;
             }
+            return current.cp;
+        } else {
+            throw new IndexOutOfBoundsException();
         }
-        return current.cp;
+
     }
 
     /** Returns an iterator over the elements in this list, starting at the given index. */
