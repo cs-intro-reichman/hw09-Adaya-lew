@@ -120,6 +120,8 @@ public class List {
             current= current.next ;
             count++ ;
         }
+     }
+
 
     }
 
