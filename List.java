@@ -10,7 +10,7 @@ public class List {
 
     // The number of elements in this list
     private int size;
-	
+    
     /** Constructs an empty list. */
     public List() {
         first = null;
@@ -19,7 +19,7 @@ public class List {
 
     /** Returns the number of elements in this list. */
     public int getSize() {
- 	      return size;
+          return size;
     }
 
     /** Returns the first element in the list */
@@ -29,10 +29,12 @@ public class List {
 
     /** GIVE Adds a CharData object with the given character to the beginning of this list. */
     public void addFirst(char chr) {
-        CharData c = new CharData(chr);
-        Node newNode = new Node(c, first);
+        
+        CharData cp = new CharData(chr);
+        Node newNode = new Node(cp);
+        newNode.next = first;
         first = newNode;
-        this.size++;
+        size++;
     }
     
     /** GIVE Textual representation of this list. */
@@ -56,12 +58,12 @@ public class List {
         Node current = first;
         int index = 0;
 
-        while (current != null) {
+        while (current != null){
             if (current.cp.equals(chr)) {
                 return index;
             }
             current = current.next;
-            index++; 
+            index++;
         }
         return -1;
     }
@@ -70,20 +72,22 @@ public class List {
      *  increments its counter. Otherwise, adds a new CharData object with the
      *  given chr to the beginning of this list. */
     public void update(char chr) {
-        int index = indexOf(chr);
-        if (index >= 0) {
-            Node current = first;
-            int indec = 0;
-            while (current != null) {
-                if (index == indec) {
-                    current.cp.count++;  // Increment the count of the existing CharData object
-                    return;  // Return after updating the count
-                }
-                current = current.next;
-                indec++;
+        Node current = first;
+        boolean found = false;
+
+        while (current != null) {
+            if (current.cp.chr == chr) {
+                current.cp.count++;
+                found = true;
+                
             }
+            current = current.next;  
         }
-        addFirst(chr);
+        if (found == false) {
+            addFirst(chr);
+            
+        }
+
     }
 
     /** GIVE If the given character exists in one of the CharData objects
@@ -141,16 +145,16 @@ public class List {
 
     /** Returns an iterator over the elements in this list, starting at the given index. */
     public ListIterator listIterator(int index) {
-	    // If the list is empty, there is nothing to iterate   
-	    if (size == 0) return null;
-	    // Gets the element in position index of this list
-	    Node current = first;
-	    int i = 0;
+        // If the list is empty, there is nothing to iterate   
+        if (size == 0) return null;
+        // Gets the element in position index of this list
+        Node current = first;
+        int i = 0;
         while (i < index) {
             current = current.next;
             i++;
         }
         // Returns an iterator that starts in that element
-	    return new ListIterator(current);
+        return new ListIterator(current);
     }
 }
