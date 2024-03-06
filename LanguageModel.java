@@ -77,7 +77,7 @@ public class LanguageModel {
     CharData first = probs.get(0);
     double firstP = first.count / (double) totalCount;
     first.p = firstP;
-    first.cp = firstP;  // Corrected this line
+    first.cp = firstP;
 
     CharData prev = first;
     CharData current;
@@ -90,6 +90,7 @@ public class LanguageModel {
         prev = current;
     }
 }
+
 
     // Returns a random character from the given probabilities list.
 	public char getRandomChar(List probs) {
