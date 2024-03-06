@@ -128,17 +128,20 @@ public class List {
     
 
     /** Returns an array of CharData objects, containing all the CharData objects in this list. */
-    public CharData get(int index) {
-        Node current = first;
-        if (index >= 0 && index < size) {
-            for (int i = 0; i < index; i++) {
+     public CharData get(int index) {
+        if (index < 0 || index >= size)
+        {
+            throw new IndexOutOfBoundsException();
+        }
+        else
+        {
+            Node current = first;
+            for (int i = 0; i < index; i++)
+            {
                 current = current.next;
             }
             return current.cp;
-        } else {
-            throw new IndexOutOfBoundsException();
         }
-
     }
 
     /** Returns an iterator over the elements in this list, starting at the given index. */
