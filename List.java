@@ -73,40 +73,52 @@ public class List {
      *  given chr to the beginning of this list. */
     public void update(char chr) {
         Node current = first;
-        boolean cc = false;
+        boolean isCharInList = false;
 
-        while (current != null) {
-            if (current.cp.chr == chr) {
+        while (current != null)
+        {
+            if (current.cp.equals(chr))
+            {
                 current.cp.count++;
-                cc = true;
-                
+                isCharInList = true;
             }
-            current = current.next;  
+            current = current.next;
         }
-        if (cc == false) {
+        if(!isCharInList)
+        {
             addFirst(chr);
-            
         }
-
     }
 
     /** GIVE If the given character exists in one of the CharData objects
      *  in this list, removes this CharData object from the list and returns
      *  true. Otherwise, returns false. */
     public boolean remove(char chr) {
-    Node current = first.next;
-    Node pre = first;
-    while (current != null) {
-        if (current.cp.equals(chr)) {
-            pre.next = current.next;
-            this.size--;  // Decrement size when removing a node
-            return true;
+        Node current = first;
+        Node prev = null;
+        int nodeCounter = 1;
+
+        while (current != null)
+        {
+            if (current.cp.equals(chr))
+            {
+                if (nodeCounter == 1)
+                {
+                    first = first.next;
+                    return true;
+                }
+                else
+                {
+                    prev.next = current.next;
+                    return true;
+                }                    
+            }
+            prev = current;
+            current = current.next;
+            nodeCounter++;
         }
-        pre = current;
-        current = current.next;
+        return false;
     }
-    return false;
-}
 
     /** Returns the CharData object at the specified index in this list. 
      *  If the index is negative or is greater than the size of this list, 
