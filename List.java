@@ -73,17 +73,17 @@ public class List {
      *  given chr to the beginning of this list. */
     public void update(char chr) {
         Node current = first;
-        boolean found = false;
+        boolean cc = false;
 
         while (current != null) {
             if (current.cp.chr == chr) {
                 current.cp.count++;
-                found = true;
+                cc = true;
                 
             }
             current = current.next;  
         }
-        if (found == false) {
+        if (cc == false) {
             addFirst(chr);
             
         }
