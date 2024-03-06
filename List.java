@@ -94,20 +94,19 @@ public class List {
      *  in this list, removes this CharData object from the list and returns
      *  true. Otherwise, returns false. */
     public boolean remove(char chr) {
-        Node current = first.next;
-        Node pre = first;
-        while(current != null){
-            if(current.cp.equals(chr)){
-                pre.next = current.next;
-                this.size++;
-                return true;
-            }
-            pre = current;
-            current = current.next;
-
+    Node current = first.next;
+    Node pre = first;
+    while (current != null) {
+        if (current.cp.equals(chr)) {
+            pre.next = current.next;
+            this.size--;  // Decrement size when removing a node
+            return true;
         }
-        return false;
+        pre = current;
+        current = current.next;
     }
+    return false;
+}
 
     /** Returns the CharData object at the specified index in this list. 
      *  If the index is negative or is greater than the size of this list, 
