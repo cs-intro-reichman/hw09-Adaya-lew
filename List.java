@@ -128,15 +128,18 @@ public class List {
     
 
     /** Returns an array of CharData objects, containing all the CharData objects in this list. */
-    public CharData[] toArray() {
-	    CharData[] arr = new CharData[size];
-	    Node current = first;
-	    int i = 0;
-        while (current != null) {
-    	    arr[i++]  = current.cp;
-    	    current = current.next;
+    public CharData get(int index) {
+        Node current = first;
+        int indexRun = 0;
+        if((index < 0) || (index > this.getSize())) {
+            throw new IndexOutOfBoundsException("The index doesn't exist");
+        } else {
+            while(indexRun < index) {
+                current = current.next;
+                indexRun++;
+            }
         }
-        return arr;
+        return current.cp;
     }
 
     /** Returns an iterator over the elements in this list, starting at the given index. */
