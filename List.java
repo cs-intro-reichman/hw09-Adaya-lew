@@ -54,7 +54,7 @@ public class List {
      *  or -1 if there is no such object in this list. */
     public int indexOf(char chr) {
         Node current = first;
-        int ind = 0;
+        int index = 0;
         while (current != null) {
             if (current.cp.equals(chr)) {
                 return index;
@@ -93,7 +93,7 @@ public class List {
         Node current = first.next;
         Node pre = first;
         while(current != null){
-            if(current.cp.equals = chr){
+            if(current.cp.equals(chr)){
                 pre.next = current.next;
                 this.size++;
                 return true;
