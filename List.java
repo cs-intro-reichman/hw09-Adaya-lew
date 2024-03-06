@@ -108,22 +108,6 @@ public class List {
     /** Returns the CharData object at the specified index in this list. 
      *  If the index is negative or is greater than the size of this list, 
      *  throws an IndexOutOfBoundsException. */
-    public CharData get(int index) {
-        
-        if (index < 0 || index > this.size){
-            throw new IndexOutOfBoundsException("no such index in the list");
-        }
-        Node current =first;
-        int count = 0;
-        while(current!= null){
-            if(index== count){
-                return current.cp ;
-            }
-            current= current.next ;
-            count++ ;
-        }
-     }
-
 
     
 
@@ -142,6 +126,17 @@ public class List {
             }
             return current.cp;
         }
+    }
+
+    public CharData[] toArray() {
+        CharData[] arr = new CharData[size];
+        Node current = first;
+        int i = 0;
+        while (current != null) {
+            arr[i++]  = current.cp;
+            current = current.next;
+        }
+        return arr;
     }
 
     /** Returns an iterator over the elements in this list, starting at the given index. */
