@@ -29,37 +29,27 @@ public class LanguageModel {
     /** Builds a language model from the text in the given file (the corpus). */
     public void train(String fileName) {
         String window = "";
-        char c;
-
+        char character;
         In in = new In(fileName);
-        
-        // Reads just enough characters to form the first window
         for (int i = 0; i < windowLength; i++) {
-            window+=in.readChar();
+            window = window + in.readChar();
         }
-
-        // Processes the entire text, one character at a time
-        while (!in.isEmpty()) {
-            // Gets the next character
-            c = in.readChar();
-
-            // Checks if the window is already in the map
+        while (!(in.isEmpty())) {
+            character = in.readChar();
             List probs = CharDataMap.get(window);
-
-            // If the window was not found in the map
-            if (probs == null) {
-                // Creates a new empty list, and adds (window,list) to the map
+            if (probs == null){
                 probs = new List();
                 CharDataMap.put(window, probs);
             }
-             // Calculates the counts of the current character.
-            probs.update(c);
-
-            // Advances the window: adds c to the window’s end, and deletes the
-            // window's first character.
-            window+=c;
+            probs.update(character);
+            window = window + character;
             window = window.substring(1);
         }
+        for (List probs : CharDataMap.values())
+            calculateProbabilities(probs);
+        // Your code goes here
+    }
+
     // Computes and sets the probabilities (p and cp fields) of all the
 	// characters in the given list. */
 	public void calculateProbabilities(List probs) {
@@ -74,7 +64,7 @@ public class LanguageModel {
             currentIterator = probs.get(i).cp;
         }
     }
-}
+
 
 
     // Returns a random character from the given probabilities list.
@@ -118,19 +108,6 @@ public class LanguageModel {
 	}
 
     public static void main(String[] args) {
-		int windowLength = Integer.parseInt(args[0]);
-        String initialText = args[1];
-        int generatedTextLength = Integer.parseInt(args[2]);
-        Boolean randomGeneration = args[3].equals("random");
-        String fileName = args[4];
-        LanguageModel lm;
-        if (randomGeneration) {
-            lm = new LanguageModel(windowLength);
-        } else {
-            lm = new LanguageModel(windowLength, 20);
-        }
-        lm.train(fileName);
-        System.out.println(lm.generate(initialText, generatedTextLength));
+        // Your code goes here
     }
 }
-    
